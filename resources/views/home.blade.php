@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in!<br /><br />
+                    {{ $tag[0]->report->title }} : {{ $tag[0]->tag->main }}<br />
+                    {{ $tag[1]->report->title }} : {{ $tag[1]->tag->main }}
                 </div>
             </div>
         </div>
