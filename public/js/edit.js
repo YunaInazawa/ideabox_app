@@ -6,11 +6,11 @@ function addKinou(){
     var str = '' + 
         '<div class="form-group">' + 
         '<h5 class="card-title">Kinou' + ++kinou + '.</h5>' + 
-        '<input class="form-control" type="text">' + 
+        '<input class="form-control"  name="kinou' + kinou + '" type="text">' + 
         '</div>' + 
         '<div class="form-group">' + 
         '<h5 class="card-title">Syosai' + kinou + '.</h5>' + 
-        '<textarea class="form-control" id="syosai" rows="3"></textarea>' + 
+        '<textarea class="form-control" name="syosai' + kinou + '" id="syosai" rows="3"></textarea>' + 
         '</div>';
 
     document.getElementById('add-kinou').innerHTML += str;
@@ -35,7 +35,7 @@ function addTags(){
     }
 
     var tagshtml = document.getElementsByClassName('tags');
-    tagshtml[tags++].innerHTML += '<input class="form-control" type="text"></input>';
+    tagshtml[tags++].innerHTML += '<input class="form-control" name="tag' + (tags + 1) + '" type="text"></input>';
 
 }
 

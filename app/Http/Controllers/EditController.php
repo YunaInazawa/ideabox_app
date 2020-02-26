@@ -26,8 +26,16 @@ class EditController extends Controller
         return view('edit');
     }
 
-    public function ok()
+    public function ok( Request $request )
     {
-        return redirect(route('success'));
+        $request->session()->regenerateToken();   // リロード等での二重送信防止
+        $title = $request->title;
+        $what = $request->what;
+        //機能いっぱい
+        $reason = $request->reason;
+        //タグいっぱい
+        $release = $request->release;   // on or ''
+        return view('success', ['title' => $title, 'what' => $what, 'reason' => $reason, 'release' => $release]);
+        //return redirect(route('success'));
     }
 }

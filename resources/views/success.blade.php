@@ -23,6 +23,11 @@
                     <h3>投稿が完了しました。</h3>
                     <p><a href="{{ route('mypage') }}">マイページへ</a><br />
                     <a href="{{ route('report') }}">記事を見る</a></p>
+
+                    {{$title}} : 
+                    {{$what}} : 
+                    {{$reason}} : 
+                    {{$release}}
                     </blockquote>
                 </div>
             </div>

@@ -30,21 +30,21 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <h5 class="card-title">Title.<font color="red">*</font></h5>
-                                <input class="form-control" type="text">
+                                <input class="form-control" name="title" type="text">
                             </div>
                             <div class="form-group">
                                 <h5 class="card-title">What.<font color="red">*</font></h5>
-                                <textarea class="form-control" id="what" rows="3"></textarea>
+                                <textarea class="form-control" name="what" id="what" rows="3"></textarea>
                             </div>
                             <hr>
 
                             <div class="form-group">
                                 <h5 class="card-title">Kinou.</h5>
-                                <input class="form-control" type="text" placeholder="<例> ユーザ登録が出来る。">
+                                <input class="form-control" name="kinou1" type="text" placeholder="<例> ユーザ登録が出来る。">
                             </div>
                             <div class="form-group">
                                 <h5 class="card-title">Syosai.</h5>
-                                <textarea class="form-control" id="syosai" rows="3" placeholder="<例> ユーザ名・メールアドレス・パスワードを登録。&#13;&#10;登録が完了するとマイページに移動する。"></textarea>
+                                <textarea class="form-control" name="syosai1" id="syosai" rows="3" placeholder="<例> ユーザ名・メールアドレス・パスワードを登録。&#13;&#10;登録が完了するとマイページに移動する。"></textarea>
                             </div>
                             <div id="add-kinou"></div>
                             <button type="button" class="btn btn-outline-primary" onclick="addKinou()">+ ADD</button>
@@ -52,7 +52,7 @@
 
                             <div class="form-group">
                                 <h5 class="card-title">Why.</h5>
-                                <textarea class="form-control" id="why" rows="3"></textarea>
+                                <textarea class="form-control" name="reason" id="why" rows="3"></textarea>
                             </div>
                             <hr>
 
@@ -60,16 +60,12 @@
                                 <h5 class="card-title">Tags.</h5>
                                 <div class="form-row">
                                     <div class="col tags">
-                                        <input class="form-control" type="text">
+                                        <input class="form-control" name="tag1" type="text">
                                     </div>
+                                    @for($i = 0; $i < 4; $i++)
                                     <div class="col tags">
                                     </div>
-                                    <div class="col tags">
-                                    </div>
-                                    <div class="col tags">
-                                    </div>
-                                    <div class="col tags">
-                                    </div>
+                                    @endfor
                                 </div>
                                 <div id="add-tags"></div>
                                 <button type="button" class="btn btn-outline-primary" onclick="addTags()">+ ADD</button>
@@ -78,7 +74,7 @@
 
                             <div class="alignright">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch1" onchange="changeBox()">
+                                    <input type="checkbox" name="release" class="custom-control-input" id="customSwitch1" onchange="changeBox()">
                                     <label class="custom-control-label" for="customSwitch1" id="release">下書き</label>
                                     <button type="submit" class="btn btn-primary">Ok</button>
                                 </div>
