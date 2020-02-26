@@ -11,11 +11,11 @@
     <div class="row justify-content-center">
         <!-- Title -->
         <div class="mainheader">
-            <h1>Title.</h1>
+            <h1>{{ $report_data->title }}</h1>
             <div id="tag-area">
-                <span class="tag-setting"><a href="#">tag</a></span>
-                <span class="tag-setting"><a href="#">tag</a></span>
-                <span class="tag-setting"><a href="#">tag</a></span>
+                @foreach($tags as $tag)
+                <span class="tag-setting"><a href="#">{{ $tag->tag->main }}</a></span>
+                @endforeach
             </div>
             
             <hr>
@@ -33,12 +33,14 @@
 
         <!-- MainContents -->        
         <div class="col-md-10">
-        <div id="days">update : 2020/02/25(Tue)</div>
+        <div class="info">update : {{$report_data->updated_at->format('Y/m/d(D)')}}</div>
+        <div class="info">user : <a href="#">{{ $report_data->user->name }}</a></div>
+        <div class="floatclear"></div>
             <div class="card">
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                    <p><h3>< 説明 ></h3>
+                    {{ $report_data->main }}</p>
                     </blockquote>
                 </div>
             </div>

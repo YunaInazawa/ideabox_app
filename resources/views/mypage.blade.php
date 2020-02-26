@@ -11,7 +11,7 @@
     <div class="row justify-content-center">
         <!-- Title -->
         <div class="mainheader">
-            <h1>My Name.</h1>
+            <h1>{{ Auth::user()->name }}</h1>
             <hr>
         </div>
 
@@ -32,30 +32,16 @@
             <div class="tab-content" id="v-pills-tabContent">
                 <!-- MyReport -->
                 <div class="tab-pane fade show active" id="v-pills-my" role="tabpanel" aria-labelledby="v-pills-my-tab">
+                    @foreach($my_reports as $data)
                     <div class="maincontent card w-100 cardcontent">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="{{ route('report') }}">Card title</a></h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h5 class="card-title"><a href="{{ route('report') }}/{{ $data->id }}">{{ $data->title }}</a></h5>
+                            <p class="card-text">{{ $data->main }}</p>
                             <hr>
                             icon
                         </div>
                     </div>
-                    <div class="maincontent card w-100 cardcontent">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="{{ route('report') }}">Card title</a></h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <hr>
-                            icon
-                        </div>
-                    </div>
-                    <div class="maincontent card w-100 cardcontent">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="{{ route('report') }}">Card title</a></h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <hr>
-                            icon
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <!-- FavoriteReport. -->
@@ -88,30 +74,16 @@
 
                 <!-- DraftReport. -->
                 <div class="tab-pane fade" id="v-pills-draft" role="tabpanel" aria-labelledby="v-pills-draft-tab">
+                    @foreach($my_drafts as $data)
                     <div class="maincontent card w-100 cardcontent">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="{{ route('report') }}">Card title</a></h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h5 class="card-title"><a href="{{ route('report') }}/{{ $data->id }}">{{ $data->title }}</a></h5>
+                            <p class="card-text">{{ $data->main }}</p>
                             <hr>
                             icon
                         </div>
                     </div>
-                    <div class="maincontent card w-100 cardcontent">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="{{ route('report') }}">Card title</a></h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <hr>
-                            icon
-                        </div>
-                    </div>
-                    <div class="maincontent card w-100 cardcontent">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="{{ route('report') }}">Card title</a></h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <hr>
-                            icon
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

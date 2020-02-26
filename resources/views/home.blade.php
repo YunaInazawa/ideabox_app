@@ -22,30 +22,16 @@
 
         <!-- MainContents -->
         <div class="col-md-9">
+            @foreach($report_datas as $data)
             <div class="maincontent card w-100 cardcontent">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="{{ route('report') }}">Card title</a></h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <h5 class="card-title"><a href="{{ route('report') }}/{{ $data->id }}">{{ $data->title }}</a></h5>
+                    <p class="card-text">{{ $data->main }}</p>
                     <hr>
                     icon
                 </div>
             </div>
-            <div class="maincontent card w-100 cardcontent">
-                <div class="card-body">
-                    <h5 class="card-title"><a href="{{ route('report') }}">Card title</a></h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <hr>
-                    icon
-                </div>
-            </div>
-            <div class="maincontent card w-100 cardcontent">
-                <div class="card-body">
-                    <h5 class="card-title"><a href="{{ route('report') }}">Card title</a></h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <hr>
-                    icon
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

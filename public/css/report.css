@@ -13,9 +13,16 @@
 
 }
 
-#days {
+.info {
   color: gray;
+  margin-left: 10px;
   text-align: right;
+  float: right;
+
+}
+
+.floatclear {
+  clear: both;
 
 }
 

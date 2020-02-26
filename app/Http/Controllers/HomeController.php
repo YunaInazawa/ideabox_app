@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ReportTag;
+use App\Report;
 
 class HomeController extends Controller
 {
@@ -14,7 +14,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $tag = ReportTag::all();
-        return view('home', ['tag' => $tag]);
+        $report_datas = Report::where('release', true)->get();;
+        return view('home', ['report_datas' => $report_datas]);
+
     }
 }
