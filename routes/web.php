@@ -11,14 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')             ->name('home');
+Route::get('/report', 'ReportController@index')     ->name('report');
+Route::get('/mypage', 'MypageController@index')     ->name('mypage');
+Route::get('/edit', 'EditController@index')         ->name('edit');
+Route::post('/edit', 'EditController@ok')           ->name('ok');
+Route::get('/success', 'SuccessController@index')   ->name('success');
