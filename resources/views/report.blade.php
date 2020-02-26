@@ -39,8 +39,26 @@
             <div class="card">
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                    <p><h3>< 説明 ></h3>
-                    {{ $report_data->main }}</p>
+                    <h1 class="subtitle">説明</h1><hr>
+                    <p>{{ $report_data->main }}</p>
+                    
+                    @if($funs->count() != 0)
+                    <h1 class="subtitle">機能</h1><hr>
+                    @foreach($funs as $fun)
+                        <h3>[{{ $fun->fun }}]</h3>
+                        <p>{{ $fun->fun_detail }}</p>
+                    @endforeach
+                    @endif
+                    
+                    @if(isset($report_data->reason))
+                    <h1 class="subtitle">理由</h1><hr>
+                    <p>{{ $report_data->reason }}</p>
+                    @endif
+
+                    @if(isset($report_data->note))
+                    <h1 class="subtitle">備考</h1><hr>
+                    <p>{{ $report_data->note }}</p>
+                    @endif
                     </blockquote>
                 </div>
             </div>

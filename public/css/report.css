@@ -40,6 +40,16 @@
 
 }
 
+.subtitle {
+  margin-top: 50px;
+
+}
+
+p {
+  padding-left: 20px;
+
+}
+
 /* 周りの凹み */
 .btn-real-dent {
   display: inline-block;

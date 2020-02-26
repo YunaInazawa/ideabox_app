@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Report;
 use App\ReportTag;
+use App\ReportFun;
 
 class ReportController extends Controller
 {
@@ -17,7 +18,8 @@ class ReportController extends Controller
     {
         $report_data = Report::find($id);
         $tags = ReportTag::where('report_id', $id)->get();
-        return view('report', ['report_data' => $report_data, 'tags' => $tags]);
+        $funs = ReportFun::where('report_id', $id)->get();
+        return view('report', ['report_data' => $report_data, 'tags' => $tags, 'funs' => $funs]);
 
     }
 }
