@@ -22,7 +22,7 @@
                     <blockquote class="aligncenter blockquote mb-0">
                     <h3>投稿が完了しました。</h3>
                     <p><a href="{{ route('mypage') }}">マイページへ</a><br />
-                    <a href="{{ route('report') }}">記事を見る</a></p>
+                    <!-- <a href="{{ route('report') }}">記事を見る</a></p> -->
 
                     </blockquote>
                 </div>

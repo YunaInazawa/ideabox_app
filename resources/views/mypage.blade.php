@@ -30,7 +30,7 @@
                 <a class="nav-link" id="v-pills-draft-tab" data-toggle="pill" href="#v-pills-draft" role="tab" aria-controls="v-pills-draft" aria-selected="false">Draft</a>
             </div>
             <br />
-            <button type="button" class="btn btn-primary btn-circle" onclick="location.href='{{ route('edit') }}'"><i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-primary btn-circle" onclick=location.href="{{ route('new') }}"><i class="fas fa-plus"></i></button>
         </div>
 
         <!-- MainContents -->        
@@ -50,7 +50,10 @@
                                 <div class="floatclear"></div>
                             </div>
                             <div class="my-admin">
-                                <div class="icon"><i class="fas fa-edit fa-2x"></i></div>
+                                @php
+                                $editurl = route('edit', $data->id);
+                                @endphp
+                                <div class="icon" onclick="edit('{{ $editurl }}')"><i class="fas fa-edit fa-2x"></i></div>
                                 @php
                                 $delurl = route('mypage', $data->id);
                                 $deltitle = $data->title;
@@ -105,7 +108,10 @@
                                 <div class="floatclear"></div>
                             </div>
                             <div class="my-admin">
-                                <div class="icon"><i class="fas fa-edit fa-2x"></i></div>
+                                @php
+                                $editurl = route('edit', $data->id);
+                                @endphp
+                                <div class="icon" onclick="edit('{{ $editurl }}')"><i class="fas fa-edit fa-2x"></i></div>
                                 @php
                                 $delurl = route('mypage', $data->id);
                                 $deltitle = $data->title;

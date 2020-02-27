@@ -4,3 +4,8 @@ function del(url, title){
     }
 
 }
+
+function edit(url){
+    location.href=url;
+
+}

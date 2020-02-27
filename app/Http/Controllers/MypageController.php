@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Report;
+use App\ReportFun;
 
 class MypageController extends Controller
 {
@@ -38,6 +39,7 @@ class MypageController extends Controller
         $del_data = Report::find($id);
         $title = $del_data->title;
         $del_data->delete();
+        ReportFun::where('report_id', $id)->delete();
         return redirect(route('mypage'))->with('message', $title . ' を削除したよ！');
     }
 }
