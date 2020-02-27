@@ -79,35 +79,47 @@ class EditController extends Controller
         $add_report->save();
 
         // DB登録(ReportFun)
-        for( $i = 0; $i < count($kinou); $i++ ){
-            $add_fun = new ReportFun;
-            $add_fun->report_id = $add_report->id;
-            $add_fun->fun = $kinou[$i];
-            $add_fun->fun_detail = $syosai[$i];
-            $add_fun->created_at = $now_time;
-            $add_fun->updated_at = $now_time;
-            $add_fun->save();
+        if( isset($kinou) ){
+            for( $i = 0; $i < count($kinou); $i++ ){
+                $add_fun = new ReportFun;
+                $add_fun->report_id = $add_report->id;
+                $add_fun->fun = $kinou[$i];
+                $add_fun->fun_detail = $syosai[$i];
+                $add_fun->created_at = $now_time;
+                $add_fun->updated_at = $now_time;
+                $add_fun->save();
+            }
         }
 
         // DB登録(Tag + ReportTag)
-        for( $i = 0; $i < count($tags); $i++ ){
-            $db_tag = Tag::where('main', $tags[$i])->first();
-            if( $db_tag == null ){
-                $db_tag = new Tag;
-                $db_tag->main = $tags[$i];
-                $db_tag->created_at = $now_time;
-                $db_tag->updated_at = $now_time;
-                $db_tag->save();
+        if( isset($tags) ){
+            for( $i = 0; $i < count($tags); $i++ ){
+                $db_tag = Tag::where('main', $tags[$i])->first();
+                if( $db_tag == null ){
+                    $db_tag = new Tag;
+                    $db_tag->main = $tags[$i];
+                    $db_tag->created_at = $now_time;
+                    $db_tag->updated_at = $now_time;
+                    $db_tag->save();
+                }
+    
+                $add_tag = new ReportTag;
+                $add_tag->report_id = $add_report->id;
+                $add_tag->tag_id = $db_tag->id;
+                $add_tag->created_at = $now_time;
+                $add_tag->updated_at = $now_time;
+                $add_tag->save();
             }
-
-            $add_tag = new ReportTag;
-            $add_tag->report_id = $add_report->id;
-            $add_tag->tag_id = $db_tag->id;
-            $add_tag->created_at = $now_time;
-            $add_tag->updated_at = $now_time;
-            $add_tag->save();
         }
 
         return redirect(route('success'));
+    }
+
+    public function edit( $id = 0 ){
+        $report_data = Report::find($id);
+        $kinou_data = ReportFun::where('report_id', $id)->get();
+        $tags_data = ReportTag::where('report_id', $id)->get();
+
+        return vire('edit', ['report_data' => $report_data, 'kinou_data' => $kinou_data, 'tags_data' => $tags_data]);
     }
 }

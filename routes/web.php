@@ -17,6 +17,8 @@ Auth::routes();
 Route::get('/', 'HomeController@index')                 ->name('home');
 Route::get('/report/{id?}', 'ReportController@index')   ->name('report');
 Route::get('/mypage', 'MypageController@index')         ->name('mypage');
+Route::get('/mypage/{id?}', 'MypageController@del')     ->name('mypage');
 Route::get('/edit', 'EditController@index')             ->name('edit');
+Route::get('/edit/{id?}', 'EditController@edit')        ->name('edit');
 Route::post('/edit', 'EditController@ok')               ->name('ok');
 Route::get('/success', 'SuccessController@index')       ->name('success');

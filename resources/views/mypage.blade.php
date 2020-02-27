@@ -6,12 +6,19 @@
 <link href="{{ asset('css/mypage.css') }}" rel="stylesheet">
 @endsection
 
+@section('js')
+<script src="{{ asset('/js/mypage.js') }}"></script>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <!-- Title -->
         <div class="mainheader">
             <h1>{{ Auth::user()->name }}</h1>
+            @if(Session::has('message'))
+            メッセージ：{{ session('message') }}
+            @endif
             <hr>
         </div>
 
@@ -19,7 +26,7 @@
         <div class="col-md-2 aligncenter">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="v-pills-my-tab" data-toggle="pill" href="#v-pills-my" role="tab" aria-controls="v-pills-my" aria-selected="true">My</a>
-                <a class="nav-link" id="v-pills-favorite-tab" data-toggle="pill" href="#v-pills-favorite" role="tab" aria-controls="v-pills-favorite" aria-selected="false">Favorite</a>
+                <a class="nav-link" id="v-pills-favorite-tab" data-toggle="pill" href="#v-pills-favorite" role="tab" aria-controls="v-pills-favorite" aria-selected="false">Favorite(未)</a>
                 <a class="nav-link" id="v-pills-draft-tab" data-toggle="pill" href="#v-pills-draft" role="tab" aria-controls="v-pills-draft" aria-selected="false">Draft</a>
             </div>
             <br />
@@ -38,7 +45,20 @@
                             <h5 class="card-title"><a href="{{ route('report') }}/{{ $data->id }}">{{ $data->title }}</a></h5>
                             <p class="card-text">{{ $data->main }}</p>
                             <hr>
-                            icon
+                            <div class="response">
+                                <div class="icon"><i class="far fa-heart fa-2x"></i><span class="response-num">?</span></div>
+                                <div class="floatclear"></div>
+                            </div>
+                            <div class="my-admin">
+                                <div class="icon"><i class="fas fa-edit fa-2x"></i></div>
+                                @php
+                                $delurl = route('mypage', $data->id);
+                                $deltitle = $data->title;
+                                @endphp
+                                <div class="icon" onclick="del('{{ $delurl }}', '{{ $deltitle }}')"><i class="fas fa-trash-alt fa-2x"></i></div>
+                                <div class="floatclear"></div>
+                            </div>
+                            <div class="floatclear"></div>
                         </div>
                     </div>
                     @endforeach
@@ -80,7 +100,20 @@
                             <h5 class="card-title"><a href="{{ route('report') }}/{{ $data->id }}">{{ $data->title }}</a></h5>
                             <p class="card-text">{{ $data->main }}</p>
                             <hr>
-                            icon
+                            <div class="response">
+                                <div class="icon"><i class="far fa-heart fa-2x"></i><span class="response-num">?</span></div>
+                                <div class="floatclear"></div>
+                            </div>
+                            <div class="my-admin">
+                                <div class="icon"><i class="fas fa-edit fa-2x"></i></div>
+                                @php
+                                $delurl = route('mypage', $data->id);
+                                $deltitle = $data->title;
+                                @endphp
+                                <div class="icon" onclick="del('{{ $delurl }}', '{{ $deltitle }}')"><i class="fas fa-trash-alt fa-2x"></i></div>
+                                <div class="floatclear"></div>
+                            </div>
+                            <div class="floatclear"></div>
                         </div>
                     </div>
                     @endforeach

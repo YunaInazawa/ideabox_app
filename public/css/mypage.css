@@ -23,6 +23,36 @@
 
 }
 
+.response {
+  width: auto;
+  float: left;
+  
+}
+
+.response-num {
+  font-size: 20px;
+  padding: 0 5px;
+
+}
+
+.my-admin {
+  width: auto;
+  float: right;
+
+}
+
+.icon {
+  width: auto;
+  margin: 0 10px;
+  float: left;
+
+}
+
+.floatclear {
+  clear: both;
+
+}
+
 .btn-circle {
   width: 30px;
   height: 30px;
