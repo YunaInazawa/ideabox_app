@@ -31,10 +31,16 @@
                             <div class="form-group">
                                 <h5 class="card-title">Title.<font color="red">*</font></h5>
                                 <input class="form-control" name="title" type="text">
+                                @if ($errors->first('title'))
+                                <p class="validation">※ {{$errors->first('title')}}</p>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <h5 class="card-title">What.<font color="red">*</font></h5>
                                 <textarea class="form-control" name="what" id="what" rows="3"></textarea>
+                                @if ($errors->first('what'))
+                                <p class="validation">※ {{$errors->first('what')}}</p>
+                                @endif
                             </div>
                             <hr>
 
@@ -47,12 +53,19 @@
                                 <textarea class="form-control" name="syosai1" id="syosai" rows="3" placeholder="<例> ユーザ名・メールアドレス・パスワードを登録。&#13;&#10;登録が完了するとマイページに移動する。"></textarea>
                             </div>
                             <div id="add-kinou"></div>
+                            <input type="hidden" name="kinou_num" id="kinou_num" value="1">
                             <button type="button" class="btn btn-outline-primary" onclick="addKinou()">+ ADD</button>
                             <hr>
 
                             <div class="form-group">
                                 <h5 class="card-title">Why.</h5>
                                 <textarea class="form-control" name="reason" id="why" rows="3"></textarea>
+                            </div>
+                            <hr>
+
+                            <div class="form-group">
+                                <h5 class="card-title">Note.</h5>
+                                <textarea class="form-control" name="note" id="note" rows="3"></textarea>
                             </div>
                             <hr>
 
@@ -68,6 +81,7 @@
                                     @endfor
                                 </div>
                                 <div id="add-tags"></div>
+                                <input type="hidden" name="tag_num" id="tag_num" value="1">
                                 <button type="button" class="btn btn-outline-primary" onclick="addTags()">+ ADD</button>
                             </div>
                             <hr>

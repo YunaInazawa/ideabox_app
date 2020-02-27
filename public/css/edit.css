@@ -56,3 +56,10 @@
   line-height: 1.33;
   border-radius: 25px;
 }
+
+.validation {
+  display: inline;
+  font-size: 0.8rem;
+  color: red;
+  margin: 0.3rem;
+}
