@@ -32,6 +32,9 @@ class EditController extends Controller
         return view('new');
     }
 
+    /**
+     * 新規作成
+     */
     public function new( Request $request )
     {
         // バリデーション
@@ -41,12 +44,15 @@ class EditController extends Controller
         ]);
 
         $request->session()->regenerateToken();   // リロード等での二重送信防止
-        $now_time = Carbon::now();
-        $title = $request->title;
-        $what = $request->what;
-        $kinou_num = $request->kinou_num;
+
+        $now_time = Carbon::now();          // 現在時刻
+        $title = $request->title;           // タイトル
+        $what = $request->what;             // 概要
+        $kinou_num = $request->kinou_num;   // 機能数
         
-        //機能いっぱい
+        // 機能いっぱい
+        // kinou : 機能
+        // syosai : 機能詳細
         for($i = 1; $i <= $kinou_num; $i++){
             $kinou_str = 'kinou' . $i;
             $syosai_str = 'syosai' . $i;
@@ -54,17 +60,18 @@ class EditController extends Controller
             if(isset($request->$syosai_str)){ $syosai[] = $request->$syosai_str; }
         }
 
-        $reason = $request->reason;
-        $note = $request->note;
-        $tag_num = $request->tag_num;
+        $reason = $request->reason;         // 理由
+        $note = $request->note;             // 備考
+        $tag_num = $request->tag_num;       // タグ数
         
-        //タグいっぱい
+        // タグいっぱい
+        // tag : タグ
         for($i = 1; $i <= $tag_num; $i++){
             $tag_str = 'tag' . $i;
             if(isset($request->$tag_str)){ $tags[] = $request->$tag_str; }
         }
         
-        $release = $request->release;   // on or ''
+        $release = $request->release;   // 完成か下書きか( 'on' or '' )
 
         // DB登録(Report)
         $add_report = new Report;
@@ -96,6 +103,7 @@ class EditController extends Controller
             for( $i = 0; $i < count($tags); $i++ ){
                 $db_tag = Tag::where('main', $tags[$i])->first();
                 if( $db_tag == null ){
+                    // 同一タグが存在しない場合、Tag 新規登録
                     $db_tag = new Tag;
                     $db_tag->main = $tags[$i];
                     $db_tag->created_at = $now_time;
@@ -103,6 +111,7 @@ class EditController extends Controller
                     $db_tag->save();
                 }
     
+                // ReportTag 登録
                 $add_tag = new ReportTag;
                 $add_tag->report_id = $add_report->id;
                 $add_tag->tag_id = $db_tag->id;
@@ -112,9 +121,13 @@ class EditController extends Controller
             }
         }
 
+        // リダイレクトで完了画面へ遷移
         return redirect(route('success'));
     }
 
+    /**
+     * 編集画面への遷移
+     */
     public function edit( $id = 0 ){
         $report_data = Report::find($id);
         $kinou_data = ReportFun::where('report_id', $id)->get();
@@ -123,6 +136,9 @@ class EditController extends Controller
         return view('edit', ['report_data' => $report_data, 'kinou_data' => $kinou_data, 'tags_data' => $tags_data]);
     }
 
+    /**
+     * 編集更新
+     */
     public function update( Request $request, $id = 0 ){
         // バリデーション
         $validator = $request->validate([
@@ -131,12 +147,15 @@ class EditController extends Controller
         ]);
 
         $request->session()->regenerateToken();   // リロード等での二重送信防止
-        $now_time = Carbon::now();
-        $title = $request->title;
-        $what = $request->what;
-        $kinou_num = $request->kinou_num;
+
+        $now_time = Carbon::now();          // 現在時刻
+        $title = $request->title;           // タイトル
+        $what = $request->what;             // 概要
+        $kinou_num = $request->kinou_num;   // 機能数
         
-        //機能いっぱい
+        // 機能いっぱい
+        // kinou : 機能
+        // syosai : 機能詳細
         for($i = 1; $i <= $kinou_num; $i++){
             $kinou_str = 'kinou' . $i;
             $syosai_str = 'syosai' . $i;
@@ -144,17 +163,18 @@ class EditController extends Controller
             if(isset($request->$syosai_str)){ $syosai[] = $request->$syosai_str; }
         }
 
-        $reason = $request->reason;
-        $note = $request->note;
-        $tag_num = $request->tag_num;
+        $reason = $request->reason;         // 理由
+        $note = $request->note;             // 備考
+        $tag_num = $request->tag_num;       // タグ数
         
-        //タグいっぱい
+        // タグいっぱい
+        // tag : タグ
         for($i = 1; $i <= $tag_num; $i++){
             $tag_str = 'tag' . $i;
             if(isset($request->$tag_str)){ $tags[] = $request->$tag_str; }
         }
         
-        $release = $request->release;   // on or ''
+        $release = $request->release;   // 完成か下書きか( 'on' or '' )
         
         // DB更新(Report)
         $up_report = Report::find($id);
@@ -187,7 +207,7 @@ class EditController extends Controller
             }
         }
 
-        // DB削除(ReportFun)
+        // DB削除(ReportTag)
         ReportTag::where('report_id', $id)->delete();
 
         // DB登録(Tag + ReportTag)
@@ -195,6 +215,7 @@ class EditController extends Controller
             for( $i = 0; $i < count($tags); $i++ ){
                 $db_tag = Tag::where('main', $tags[$i])->first();
                 if( $db_tag == null ){
+                    // 同一タグが存在しない場合、Tag 新規登録
                     $db_tag = new Tag;
                     $db_tag->main = $tags[$i];
                     $db_tag->created_at = $now_time;
@@ -202,8 +223,9 @@ class EditController extends Controller
                     $db_tag->save();
                 }
     
+                // ReportTag 登録
                 $add_tag = new ReportTag;
-                $add_tag->report_id = $up_report->id;
+                $add_tag->report_id = $add_report->id;
                 $add_tag->tag_id = $db_tag->id;
                 $add_tag->created_at = $now_time;
                 $add_tag->updated_at = $now_time;
@@ -211,6 +233,7 @@ class EditController extends Controller
             }
         }
 
+        // リダイレクトで完了画面へ遷移
         return redirect(route('success'));
     }
 }
